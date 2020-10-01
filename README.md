@@ -1,4 +1,4 @@
-# html5-qrcode without any external frameworks
+<!-- # html5-qrcode without any external frameworks
 
 ## Include the js library in your project
 ```html
@@ -21,7 +21,7 @@ function onScanSuccess(qrCodeMessage) {
     if (qrCodeMessage !== lastResult) {
         ++countResults;
         lastResult = qrCodeMessage;
-        resultContainer.innerHTML 
+        resultContainer.innerHTML
             += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
     }
 }
@@ -29,4 +29,4 @@ function onScanSuccess(qrCodeMessage) {
 var html5QrcodeScanner = new Html5QrcodeScanner(
     "qr-reader", { fps: 10, qrbox: 250 });
 html5QrcodeScanner.render(onScanSuccess);
-```
+``` -->
