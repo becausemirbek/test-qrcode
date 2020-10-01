@@ -30,6 +30,7 @@
         background-color: #17a2b8;
         color: #fff;
       }
+
       #qr-reader
         > #qr-reader__dashboard
         > #qr-reader__dashboard_section
@@ -43,6 +44,8 @@
         button {
           font-size: 24px;
           padding: 10px;
+          margin: 40px 0;
+          width: 100% !important;
         }
         #submitBtn {
           padding: 10px;
@@ -63,7 +66,12 @@
         >
           <input type="hidden" name="entry.843509151" id="qrcode" />
           <input type="hidden" name="entry.1694132655" id="name" />
-          <button type="submit" id="submitBtn" class="btn btn-info" disabled>
+          <button
+            type="submit"
+            id="submitBtn"
+            class="btn btn-info w-100"
+            disabled
+          >
             Отправить
           </button>
         </form>
