@@ -4,6 +4,7 @@
     <body>
       <div id="qr-reader" style="width: 500px"></div>
       <div id="qr-reader-results"></div>
+      <button id="submitBtn" disabled>Отправить</button>
     </body>
     <script src="./html5-qrcode.min.js"></script>
     <script>
@@ -22,6 +23,7 @@
 
       docReady(function () {
         var resultContainer = document.getElementById("qr-reader-results");
+        var submitBtn = document.getElementById("submitBtn");
         var lastResult,
           countResults = 0;
         function onScanSuccess(qrCodeMessage) {
@@ -30,6 +32,29 @@
             lastResult = qrCodeMessage;
             resultContainer.innerHTML += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
           }
+          submitBtn.removeAttribute("disabled");
+        }
+        function onSubmit() {
+          fetch(
+            "https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                "entry.843509151": localStorage.getItem("makers.qrcode"),
+                "entry.1694132655": localStorage.getItem("makers.user"),
+              }),
+            }
+          )
+            .then(() => {
+              alert("Success!");
+            })
+            .catch((error) => {
+              console.log({ error });
+              alert("Error: " + error.message);
+            });
         }
 
         var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
@@ -37,6 +62,7 @@
           qrbox: 250,
         });
         html5QrcodeScanner.render(onScanSuccess);
+        submitBtn.onclick = onSubmit;
       });
     </script>
   </head>
