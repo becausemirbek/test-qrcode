@@ -2,10 +2,20 @@
   <head>
     <title>Html-Qrcode Demo</title>
     <body>
-      <h1>Hello</h1>
+      <h1>Hello world</h1>
       <div id="qr-reader" style="width: 500px"></div>
       <div id="qr-reader-results"></div>
+      <form
+        target="myFrame"
+        method="POST"
+        action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse"
+      >
+        <input type="hidden" name="entry.843509151" id="qrcode" />
+        <input type="hidden" name="entry.1694132655" id="name" />
+      </form>
       <button id="submitBtn" disabled>Отправить</button>
+      <!-- src="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse" -->
+      <iframe name="myFrame"></iframe>
     </body>
     <script src="./html5-qrcode.min.js"></script>
     <script>
@@ -25,6 +35,8 @@
       docReady(function () {
         var resultContainer = document.getElementById("qr-reader-results");
         var submitBtn = document.getElementById("submitBtn");
+        var qrCodeInp = document.getElementById("qrcode");
+        var nameInp = document.getElementById("name");
         var lastResult,
           countResults = 0;
         function onScanSuccess(qrCodeMessage) {
@@ -34,30 +46,11 @@
             resultContainer.innerHTML += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
           }
           submitBtn.removeAttribute("disabled");
-          localStorage.setItem("makers.qrcode", lastResult);
-          localStorage.setItem("makers.user");
+          qrCodeInp.value = lastResult;
+          nameInp.value = "Mirba";
+          // localStorage.setItem("makers.qrcode", lastResult);
+          // localStorage.setItem("makers.user", "mirba");
         }
-        function onSubmit() {
-          fetch(
-            "https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: {
-                "entry.843509151": localStorage.getItem("makers.qrcode"),
-                "entry.1694132655": localStorage.getItem("makers.user"),
-              },
-            }
-          )
-            .then(() => {
-              alert("Success!");
-            })
-            .catch((error) => {
-              console.log({ error });
-              alert("Error: " + error.message);
-            });
-        }
-
         var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
           fps: 10,
           qrbox: 250,
