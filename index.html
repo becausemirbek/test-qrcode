@@ -46,28 +46,30 @@
         }
       }
     </style>
-    <body class="d-flex align-items-center">
-      <div class="container col-lg-10 col-md-12">
-        <div id="qr-reader" class="w-100"></div>
-        <div id="qr-reader-results"></div>
+    <body>
+      <div class="main h-100 d-flex align-items-center">
+        <div class="container col-lg-10 col-md-12">
+          <div id="qr-reader" class="w-100"></div>
+          <div id="qr-reader-results"></div>
 
-        <form
-          target="myFrame"
-          method="POST"
-          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse"
-        >
-          <input type="hidden" name="entry.843509151" id="qrcode" />
-          <input type="hidden" name="entry.1694132655" id="name" />
-          <button
-            type="submit"
-            id="submitBtn"
-            class="btn btn-info w-100"
-            disabled
+          <form
+            target="myFrame"
+            method="POST"
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse"
           >
-            Send
-          </button>
-        </form>
-        <iframe name="myFrame" class="w-100 border"></iframe>
+            <input type="hidden" name="entry.843509151" id="qrcode" />
+            <input type="hidden" name="entry.1694132655" id="name" />
+            <button
+              type="submit"
+              id="submitBtn"
+              class="btn btn-info w-100"
+              disabled
+            >
+              Send
+            </button>
+          </form>
+          <iframe name="myFrame" class="w-100 border"></iframe>
+        </div>
       </div>
     </body>
     <script src="./html5-qrcode.min.js"></script>
@@ -106,7 +108,7 @@
         }
         var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
           fps: 20,
-          qrbox: 300,
+          qrbox: 500,
         });
         html5QrcodeScanner.render(onScanSuccess);
         submitBtn.onclick = onSubmit;
