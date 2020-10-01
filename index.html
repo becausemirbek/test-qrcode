@@ -19,12 +19,6 @@
         color: #fff;
       }
 
-      .main {
-        max-height: 100vh;
-        display: flex;
-        align-items: center;
-      }
-
       #qr-reader
         > #qr-reader__dashboard
         > #qr-reader__dashboard_section
@@ -42,6 +36,10 @@
           width: 100% !important;
           border-radius: 8px;
         }
+        body {
+          display: flex;
+          align-items: center;
+        }
         #submitBtn {
           padding: 50px 0;
           font-size: 24px;
@@ -53,6 +51,7 @@
       }
     </style>
     <body>
+      <h1>AEA</h1>
       <div class="main">
         <div class="container col-lg-10 col-md-12">
           <div id="qr-reader" class="w-100"></div>
@@ -111,6 +110,7 @@
           submitBtn.removeAttribute("disabled");
           qrCodeInp.value = lastResult;
           nameInp.value = "Mirba";
+          alert("AEA отсканировано");
         }
         var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
           fps: 20,
