@@ -33,6 +33,10 @@
         background-color: #28a745;
       }
       @media (max-width: 1199px) {
+        body {
+          display: flex;
+          align-items: center;
+        }
         button {
           font-size: 30px;
           padding: 80px 10px;
@@ -51,31 +55,30 @@
       }
     </style>
     <body>
-      <h1>HHHHHH</h1>
-      <div class="main d-flex align-items-center">
-        <div class="container col-lg-10 col-md-12">
-          <div id="qr-reader" class="w-100"></div>
-          <div id="qr-reader-results"></div>
+      <!-- <div class="main d-flex align-items-center"> -->
+      <div class="container col-lg-10 col-md-12">
+        <div id="qr-reader" class="w-100"></div>
+        <div id="qr-reader-results"></div>
 
-          <form
-            target="myFrame"
-            method="POST"
-            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse"
+        <form
+          target="myFrame"
+          method="POST"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse"
+        >
+          <input type="hidden" name="entry.843509151" id="qrcode" />
+          <input type="hidden" name="entry.1694132655" id="name" />
+          <button
+            type="submit"
+            id="submitBtn"
+            class="btn btn-info w-100"
+            disabled
           >
-            <input type="hidden" name="entry.843509151" id="qrcode" />
-            <input type="hidden" name="entry.1694132655" id="name" />
-            <button
-              type="submit"
-              id="submitBtn"
-              class="btn btn-info w-100"
-              disabled
-            >
-              Send
-            </button>
-          </form>
-          <iframe name="myFrame" class="w-100 border"></iframe>
-        </div>
+            Send
+          </button>
+        </form>
+        <iframe name="myFrame" class="w-100 border"></iframe>
       </div>
+      <!-- </div> -->
     </body>
     <script src="./html5-qrcode.min.js"></script>
     <script>
