@@ -12,8 +12,8 @@
       >
         <input type="hidden" name="entry.843509151" id="qrcode" />
         <input type="hidden" name="entry.1694132655" id="name" />
+        <button type="submit" id="submitBtn" disabled>Отправить</button>
       </form>
-      <button id="submitBtn" disabled>Отправить</button>
       <!-- src="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse" -->
       <iframe name="myFrame"></iframe>
     </body>
@@ -35,7 +35,9 @@
       docReady(function () {
         var resultContainer = document.getElementById("qr-reader-results");
         var submitBtn = document.getElementById("submitBtn");
+
         var qrCodeInp = document.getElementById("qrcode");
+
         var nameInp = document.getElementById("name");
         var lastResult,
           countResults = 0;
@@ -48,8 +50,6 @@
           submitBtn.removeAttribute("disabled");
           qrCodeInp.value = lastResult;
           nameInp.value = "Mirba";
-          // localStorage.setItem("makers.qrcode", lastResult);
-          // localStorage.setItem("makers.user", "mirba");
         }
         var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
           fps: 10,
