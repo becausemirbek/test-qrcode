@@ -78,45 +78,51 @@
     </body>
     <script src="./html5-qrcode.min.js"></script>
     <script>
-      function docReady(fn) {
-        // see if DOM is already available
-        if (
-          document.readyState === "complete" ||
-          document.readyState === "interactive"
-        ) {
-          // call on next available tick
-          setTimeout(fn, 1);
-        } else {
-          document.addEventListener("DOMContentLoaded", fn);
+      document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("user");
+        if (!token) {
+          location.replace("registration.html");
         }
-      }
-
-      docReady(function () {
-        var resultContainer = document.getElementById("qr-reader-results");
-        var submitBtn = document.getElementById("submitBtn");
-
-        var qrCodeInp = document.getElementById("qrcode");
-
-        var nameInp = document.getElementById("name");
-        var lastResult,
-          countResults = 0;
-        function onScanSuccess(qrCodeMessage) {
-          if (qrCodeMessage !== lastResult) {
-            ++countResults;
-            lastResult = qrCodeMessage;
-            resultContainer.innerHTML += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
+        function docReady(fn) {
+          // see if DOM is already available
+          if (
+            document.readyState === "complete" ||
+            document.readyState === "interactive"
+          ) {
+            // call on next available tick
+            setTimeout(fn, 1);
+          } else {
+            document.addEventListener("DOMContentLoaded", fn);
           }
-          submitBtn.removeAttribute("disabled");
-          qrCodeInp.value = lastResult;
-          nameInp.value = "Mirba";
-          alert("AEA отсканировано");
         }
-        var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
-          fps: 20,
-          qrbox: 500,
+
+        docReady(function () {
+          var resultContainer = document.getElementById("qr-reader-results");
+          var submitBtn = document.getElementById("submitBtn");
+
+          var qrCodeInp = document.getElementById("qrcode");
+
+          var nameInp = document.getElementById("name");
+          var lastResult,
+            countResults = 0;
+          function onScanSuccess(qrCodeMessage) {
+            if (qrCodeMessage !== lastResult) {
+              ++countResults;
+              lastResult = qrCodeMessage;
+              resultContainer.innerHTML += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
+            }
+            submitBtn.removeAttribute("disabled");
+            qrCodeInp.value = lastResult;
+            nameInp.value = token;
+            alert("AEA отсканировано");
+          }
+          var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
+            fps: 20,
+            qrbox: 500,
+          });
+          html5QrcodeScanner.render(onScanSuccess);
+          submitBtn.onclick = onSubmit;
         });
-        html5QrcodeScanner.render(onScanSuccess);
-        submitBtn.onclick = onSubmit;
       });
     </script>
 
