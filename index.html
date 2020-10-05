@@ -118,7 +118,9 @@
               'Content-Type': 'application/json',
               "Authorization": "JWT " + token,
             },
-              body: qrCodeMessage
+              body: {
+                "qrcode": qrCodeMessage
+              }
             }).then(res => alert("AEA Отправлено" + res)).catch(err => console.log(err))
           }
           var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
