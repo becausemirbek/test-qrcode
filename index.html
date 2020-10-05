@@ -115,7 +115,7 @@
             fetch("http://localhost:4000/api/qr-code/add", {
               method: "POST" ,
               headers: {
-              "Authorization": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjc3NWNhMjU4ZGM5ZTFiNjkzN2FkYTgiLCJlbWFpbCI6ImRlbW9AZGVtby5jb20iLCJpYXQiOjE2MDE3MTE0ODcsImV4cCI6MTYwMTcxMjA4N30.4TpoWsbcS46lKyd17A-biQVbTptusDWBbh4UlbUj3CU",
+              "Authorization": `JWT+ ${token}`,
             },
               body: qrCodeMessage
             })
