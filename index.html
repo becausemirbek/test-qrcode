@@ -115,11 +115,11 @@
             fetch("http://localhost:4000/api/qr-code/add", {
               method: "POST" ,
               headers: {
-              "Authorization": `JWT ${token}`,
+              'Content-Type': 'application/json',
+              "Authorization": "JWT " + token,
             },
               body: qrCodeMessage
-            })
-            alert("AEA Отправлено");
+            }).then(res => alert("AEA Отправлено" + res)).catch(err => console.log(err))
           }
           var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
             fps: 20,
