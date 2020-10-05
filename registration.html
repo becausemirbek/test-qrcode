@@ -59,7 +59,7 @@
           body: JSON.stringify(data),
         }).then((res) =>
           res.statusText === "Created"
-            ? location.replace("login.html")
+            ? location.replace("/test-qrcode/login.html")
             : alert("Что то пошло не так")
         );
       });

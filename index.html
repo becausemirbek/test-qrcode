@@ -67,7 +67,6 @@
             type="submit"
             id="submitBtn"
             class="btn btn-info w-100"
-            disabled
           >
             Send
           </button>
@@ -100,7 +99,22 @@
           var resultContainer = document.getElementById("qr-reader-results");
           var submitBtn = document.getElementById("submitBtn");
 
-          var qrCodeInp = document.getElementById("qrcode");
+          function func() {
+              fetch("http://localhost:4000/api/qr-code/add", {
+              method: "POST",
+              headers: {
+              'Content-Type': 'application/json',
+              "Accept": 'application/json',
+              "Authorization": "JWT " + token
+            },
+              body: JSON.stringify({
+                "qrcode": "coding is easy"
+              }),
+            })
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+          }
+            submitBtn.addEventListener("click", func)
 
           var nameInp = document.getElementById("name");
           var lastResult,
@@ -111,20 +125,8 @@
               lastResult = qrCodeMessage;
               resultContainer.innerHTML += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
             }
-            submitBtn.removeAttribute("disabled");
-            fetch("http://localhost:4000/api/qr-code/add", {
-              method: "POST" ,
-              headers: {
-              'Content-Type': 'application/json',
-              "Authorization": "JWT " + token,
-            },
-              body: {
-                "qrcode": JSON.stringify(qrCodeMessage)
-              },
-            })
-            .then(res => alert("AEA Отправлено" + res))
-            .catch(err => console.log(err))
-          }
+            // submitBtn.removeAttribute("disabled");
+            }
           var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
             fps: 20,
             qrbox: 500,
@@ -135,6 +137,7 @@
       });
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
