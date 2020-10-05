@@ -56,13 +56,13 @@
         <div id="qr-reader" class="w-100"></div>
         <div id="qr-reader-results"></div>
 
-        <form
+        <!-- <form
           target="myFrame"
           method="POST"
           action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScSFTODP2wz7lP-s-DJraOJO6NngkX8eL5-RH4DoYi4QTnMOw/formResponse"
         >
           <input type="hidden" name="entry.843509151" id="qrcode" />
-          <input type="hidden" name="entry.1694132655" id="name" />
+          <input type="hidden" name="entry.1694132655" id="name" /> -->
           <button
             type="submit"
             id="submitBtn"
@@ -71,9 +71,9 @@
           >
             Send
           </button>
-        </form>
+        <!-- </form>
         <iframe name="myFrame" class="w-100 border"></iframe>
-      </div>
+      </div> -->
       <!-- </div> -->
     </body>
     <script src="./html5-qrcode.min.js"></script>
@@ -112,9 +112,12 @@
               resultContainer.innerHTML += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
             }
             submitBtn.removeAttribute("disabled");
-            qrCodeInp.value = lastResult;
-            nameInp.value = token;
-            alert("AEA отсканировано");
+            fetch("http://localhost:4000/api/qr-code/add", {headers: {
+              "Authorization": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjc3NWNhMjU4ZGM5ZTFiNjkzN2FkYTgiLCJlbWFpbCI6ImRlbW9AZGVtby5jb20iLCJpYXQiOjE2MDE3MTE0ODcsImV4cCI6MTYwMTcxMjA4N30.4TpoWsbcS46lKyd17A-biQVbTptusDWBbh4UlbUj3CU",
+            },
+              body: qrCodeMessage
+            })
+            alert("AEA Отправлено");
           }
           var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
             fps: 20,
